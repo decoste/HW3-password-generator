@@ -74,7 +74,7 @@ for (i = 0; i < UpperCase.length; i++) {
 }
 console.log(lowerCase);
 
-function PassOptions() {
+function getPassOptions() {
     let length = parseInt(prompt('How many characters would you like your password to contain?Your password should be between 8 to 128 charecters'));
     if (isNaN(length) === true) {
         alert("Please enter a number.");
@@ -96,8 +96,24 @@ function PassOptions() {
         && includeUpperCase === false) {
         alert('The user must select at least one character type.')
     }
+
+    var PassOptions = {
+        length: length,
+        includeSpecialChar: includeSpecialChar,
+        includeNumeric: includeNumeric,
+        includeLowerCase: includeLowerCase,
+        includeUpperCase: includeUpperCase
+    };
+    return PassOptions;
+}
+
+function getRandom(arr) {
+    var randIndex = Math.floor(Math.random() * arr.length);
+    var randElement = arr[randIndex];
+
+    return randElement;
 }
 
 
 
-PassOptions();
+getPassOptions()
