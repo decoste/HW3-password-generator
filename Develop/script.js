@@ -97,28 +97,67 @@ function getPassOptions() {
         alert('The user must select at least one character type.')
     }
 
-
-
-    var  PassOptions = {
+    var PassOptions = {
         length: length,
         includeSpecialChar: includeSpecialChar,
         includeNumeric: includeNumeric,
         includeLowerCase: includeLowerCase,
         includeUpperCase: includeUpperCase,
     };
-    
-    
+
     return PassOptions;
 }
 
-function getRandom(arr) {
-    
+function randomPass(arr) {
+
     var randIndex = Math.floor(Math.random() * arr.length);
     var randElement = arr[randIndex];
-  
     return randElement;
-  }
+}
 
-  let onClick = document.querySelector("#generate").addEventListener('click', getPassOptions)
+function createPassword() {
+    var options = getPassOptions();
+    var result = [];
+    var possibleCharacters = [];
+    var passwordOption = [];
+
+    if (options.includeSpecialChar) {
+        possibleCharacters = possibleCharacters.concat(specialCharacters);
+        passwordOption.push(randomPass(specialCharacters));
+    }
+
+    if (options.includeNumeric) {
+        possibleCharacters = possibleCharacters.concat(numbers);
+        passwordOption.push(randomPass(numbers));
+    }
+
+    if (options.includeLowerCase) {
+        possibleCharacters = possibleCharacters.concat(lowerCase);
+        passwordOption.push(randomPass(lowerCase));
+    }
+
+    if (options.includeUpperCase) {
+        possibleCharacters = possibleCharacters.concat(UpperCase);
+        passwordOption.push(randomPass(UpperCase));
+    }
+
+    for (let i = 0; i < options.length; i++) {
+        let possibleCharacter = randomPass(possibleCharacters);
+        result.push(possibleCharacter);
+    }
+
+    for (let i = 0; i < password.length; i++) {
+        result[i] = passwordOption[i];
+    }
+
+    return result.join('');
+}
+
+function writePassword() {
+    let password = createPassword();
+    let passwordText = document.querySelector('#password')
+    passwordText.value = password;
+}
 
 
+let onClick = document.querySelector("#generate").addEventListener('click', writePassword);
