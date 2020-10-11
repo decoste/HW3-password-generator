@@ -97,23 +97,28 @@ function getPassOptions() {
         alert('The user must select at least one character type.')
     }
 
-    var PassOptions = {
+
+
+    var  PassOptions = {
         length: length,
         includeSpecialChar: includeSpecialChar,
         includeNumeric: includeNumeric,
         includeLowerCase: includeLowerCase,
-        includeUpperCase: includeUpperCase
+        includeUpperCase: includeUpperCase,
     };
+    
+    
     return PassOptions;
 }
 
 function getRandom(arr) {
+    
     var randIndex = Math.floor(Math.random() * arr.length);
     var randElement = arr[randIndex];
-
+  
     return randElement;
-}
+  }
+
+  let onClick = document.querySelector("#generate").addEventListener('click', getPassOptions)
 
 
-
-getPassOptions()
